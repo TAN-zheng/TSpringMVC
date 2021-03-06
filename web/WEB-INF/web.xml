@@ -3,9 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+<!--
+1、<load-on-startup>和<init-param>都是可选的。如果<load-on-startup>如果值是1，应用程序启动时会立刻加载该Servlet。
+2、<load-on-startup>如果不存在，则应用程序会在第一个Servlet请求时加载该Servlet。
+3、<init-param>存在并且通过其子元素配置了SpringMVC配置文件的路径，程序启动时会加载 配置路径下的配置文件。
+4、没有<init-param>元素配置，则程序会到WEB-INF目录下寻找如：servletName-servlet.xml方式命名的配置文件。
+    （1）、servletName值的是部署在web.xml中的DispatcherServlet的名称。本例中为：springmvc,而-servlet.xml是配置文件的固定写法。
+    （2）、所以程序会在WEB-INF下寻找springmvc-servlet.xml。
+
+
+-->
     <servlet>
-<!--        配置前端过滤器-->
+<!--        3、配置前端过滤器-->
         <servlet-name>springmvc</servlet-name>
+<!--        4、进入前端控制器-->
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 <!--        初始化时加载配置文件。-->
         <init-param>
@@ -13,9 +24,12 @@
             <param-value>classpath:springmvc-config.xml</param-value>
         </init-param>
 <!--        表示在容器启动时立即加载Servlet-->
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
+<!--        2、定义的别名-->
         <servlet-name>springmvc</servlet-name>
+<!--        1、浏览器访问地址-->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 </web-app>

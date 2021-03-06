@@ -3,6 +3,18 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://springframework.org/schema/beans/spring-beans-4.3.xsd">
+<!--
+1、首先定义一个名称为：/firstController的Bean。改Bean会将控制器类FirstController映射到/firstController请求中。
+（我的理解就是WEN浏览器访问的时候就能被访问到。因为他把FirstController映射到这个请求中了。）
+2、然后配置处理器映射器BeanNameUrlHandlerMapping  和  处理器适配器：SimpleControllerHandlerAdapter
+    （1）、其中处理器映射器用于将处理器Bean中的name（即URL）进行处理器查找。
+    （2）、处理器适配器用于完成对FirstController处理器中handleRequest()方法的调用。
+3、最后配置视图解析器。来解析结果。并将结果呈现给用户。
+（spring4以后就算不配置，也会自定使用默认完成。）
+
+
+
+-->
 <!--    配置处理器Handle，映射/firstController请求。-->
     <bean name="/firstController" class="com.stx.controller.FirstController"></bean>
 <!--    处理器映射器，将处理器Handle的name作为url进行查找-->
